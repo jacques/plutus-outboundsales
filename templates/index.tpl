@@ -13,17 +13,27 @@
   <body class="container">
     <h2 class="page-header">Calling {$user->first_name|escape} {$user->last_name|escape} on {$user->mobile_number|escape}</h2>
 
+    <div class="alert alert-danger">
+      <p>
+        This is not a finalised and signed off by Tim Colman script.  It is rough for
+        figuring out how to get a web page to display information and change the script
+        as the call goes on. (i.e. opting into product / requesting info / etc.)
+      </p>
+    </div>
+
     <table class="table table-bordered table-condensed small">
       <thead>
         <tr>
           <th>First name</th>
           <th>Surname</th>
+          <th>FICA Status</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{$user->first_name|escape}</td>
           <td>{$user->last_name|escape}</td>
+          <td class="{if $user->fica_status == 0}danger{elseif $user->fica_status == 1}warning{else}success{/if}">{$user->fica_status}</td>
         </tr>
       </tbody>
     </table>
@@ -64,18 +74,31 @@
     </p>
 
     <p>
-      IMOGO has a very exciting offer for our customers.  The Telkom Sim Sonke Sim Card.
+      IMOGO has a very exciting offer for our customers.  The Telkom Sim Sonke Sim Card as well as
+      monthly airtime.
+    </p>
+
+    <p>
+      How much money do you spend on airtime every month?
     </p>
 
     <p>
       The package provides you with:
 
       <ul>
-        <li>1GiB of data</li>
-        <li>300 telkom to telkom minutes</li>
+        <li>100GiB of data</li>
+        <li>Unlimited Telkom to Telkom minutes</li>
         <li>10GiB of Telkom Wifi Data</li>
         <li>Free Whatapp</li>
       </ul>
+    </p>
+
+    <p>
+      Do you have a funeral plan?
+    </p>
+
+    <p>
+      Can I interest you in a funeral plan for R 10k cover for you and your family?  (Details to be populated still).
     </p>
 
     <p>
