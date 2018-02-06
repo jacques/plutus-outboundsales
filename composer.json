@@ -1,0 +1,20 @@
+{
+    "name": "jacques/plutus-outboundsales",
+    "description": "Outbound Sales Related items for Plutus",
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Plutus\\": "src/"
+        }
+    },
+    "license": "MPLv2",
+    "authors": [
+        {
+            "name": "Jacques Marneweck",
+            "email": "jacques@powertrip.co.za"
+        }
+    ]
+}
