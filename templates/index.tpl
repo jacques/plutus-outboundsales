@@ -5,13 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Outbound Sales</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body class="container">
     <h2 class="page-header">Calling {$user->first_name|escape} {$user->last_name|escape} on {$user->mobile_number|escape}</h2>
+
+    <table class="table table-bordered table-condensed small">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Surname</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{$user->first_name|escape}</td>
+          <td>{$user->last_name|escape}</td>
+        </tr>
+      </tbody>
+    </table>
 
     <p>
       Good day.  Can I please speak to {$user->first_name|escape} {$user->last_name|escape}?
@@ -52,7 +67,6 @@
       IMOGO has a very exciting offer for our customers.  The Telkom Sim Sonke Sim Card.
     </p>
 
-
     <p>
       The package provides you with:
 
@@ -63,6 +77,20 @@
         <li>Free Whatapp</li>
       </ul>
     </p>
+
+    <p>
+      How does that sound {$user->last_name|escape}?
+    </p>
+
+    <p>
+      Can I confirm how you would like to pay for your product Boquet?
+    </p>
+
+    <div class="creditcard">
+      <p>
+        I will send you an email with a link to add a credit card to your profile via PayFast our payment provider.
+      </p>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
