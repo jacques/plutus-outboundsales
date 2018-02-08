@@ -8,10 +8,12 @@
  */
 
 use Plutus\Models\Account;
+use Plutus\Models\OutboundCampaign;
+use Plutus\Models\OutboundSale;
 use Plutus\Models\User;
 
 /**
- * Frameset
+ * Sales Script Page
  */
 $app->get('/admin/outboundsales', $authenticate($app), $is_admin($app), function () use ($app)
     {
@@ -26,6 +28,35 @@ $app->get('/admin/outboundsales', $authenticate($app), $is_admin($app), function
             'user' => $user,
         ]);
         $app->template->display('outboundsales/index.tpl');
+    }
+);
+
+$app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), function () use ($app)
+    {
+        /**
+         * We want to not select any of Sybille's userbase here.  Just IMOGO users.
+         */
+        $user = User::whereNull('source_id')
+            ->inRandomOrder()
+            ->firstOrFail();
+
+        $app->template->bulkAssign([
+            'user' => $user,
+        ]);
+        $app->template->display('outboundsales/index.tpl');
+    }
+);
+
+$app->get('/admin/outboundsales/campaigns/new', $authenticate($app), $is_admin($app), function () use ($app)
+    {
+        if (
+            !is_superadmin() &&
+            !is_financeadmin()
+        ) {
+            $app->notFound();
+        }
+
+        $app->template->display('campaigns__new.tpl');
     }
 );
 
