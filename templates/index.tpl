@@ -58,7 +58,9 @@
 
     <p>
       Do you know when {$user->first_name|escape} {$user->last_name|escape} will be
-      available to take a call?
+      available to take a call?   Or would you be interested in finding out more about our
+      offering?  If they want to find out more then we need to show a clean script to capture
+      the minimum info for the potential customer.
     </p>
 
     <h3 class="page-header">Callback</h3>
@@ -106,18 +108,71 @@
     </p>
 
     <p>
-      Can I confirm how you would like to pay for your product Boquet?
+      May I go ahead and get your details for your activation of your IMOGO BongoTel Telkom Sim Sonke product?
     </p>
 
+    <p>
+      Please confirm your ID number {$user->last_name|escape} (expect {$user->id_document_number|escape}).
+    </p>
+
+    <p>
+      Can I confirm how you would like to pay for your product Bouquet?
+
+      <select name="payment_method" class="form-control">
+        <option value="wallet">IMOGO Account</option>
+        <option value="creditcard">Credit Card</option>
+        <option value="debitorder">Debit Order</option>
+      </select>
+    </p>
+
+    <div class="wallet">
+      <h2 class="page-header">IMOGO Wallet</h2>
+
+      <p>
+        Great.  Please remember to ensure your monthly amount of R 200.00 and your once-off amount of R 200.00
+        is deposited into the following FNB bank account.  I will also send you an email with the confirm your
+        subscription which includes the banking details to use as well as how deposit at Boxer, Pick 'n Pay,
+        Checkers, Shoprite and Spar if that is more convient for you.
+      </p>
+
+      <p>
+
+      </p>
+      <form>
+      </form>
+    </div>
+    <div class="debitorder">
+      <h2 class="page-header">Debit Order</h2>
+
+      <p>
+        Great.  Please provide me with your banking details so we can setup a debit order for paying for your bouquet.
+      </p>
+
+      <p>
+
+      </p>
+      <form>
+      </form>
+    </div>
     <div class="creditcard">
+      <h2 class="page-header">Credit Card Payment</h2>
+
       <p>
         I will send you an email with a link to add a credit card to your profile via PayFast our payment provider.
       </p>
+
+      <button class="btn btn-primary"><i class="fa fa-fw fa-send"></i> Send Card Link</button>
     </div>
+
+    <p>
+      May I interest you with one of our exciting cellphones?   Blurb goes here.
+    </p>
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
   </body>
 </html>
