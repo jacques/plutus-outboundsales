@@ -7,6 +7,7 @@
  * @package   OutboundSales
  */
 
+use Leopardrock\Pagination;
 use Plutus\Models\Account;
 use Plutus\Models\OutboundCampaign;
 use Plutus\Models\OutboundSale;
@@ -47,6 +48,24 @@ $app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), func
     }
 );
 
+$app->get('/admin/outboundsales/campaigns', $authenticate($app), $is_admin($app), function () use ($app)
+    {
+        if (
+            !is_superadmin() &&
+            !is_financeadmin()
+        ) {
+            $app->notFound();
+        }
+
+        $query = OutboundCampaign::orderBy('id', 'DESC');
+        $data = Pagination::paginate($app, 0, 50, 1, $query);
+        $app->template->bulkAssign([
+            'data' => $data,
+        ]);
+        $app->template->display('outboundsales/campaigns.tpl');
+    }
+);
+
 $app->get('/admin/outboundsales/campaigns/new', $authenticate($app), $is_admin($app), function () use ($app)
     {
         if (
@@ -56,7 +75,7 @@ $app->get('/admin/outboundsales/campaigns/new', $authenticate($app), $is_admin($
             $app->notFound();
         }
 
-        $app->template->display('campaigns__new.tpl');
+        $app->template->display('outboundsales/campaigns__new.tpl');
     }
 );
 
