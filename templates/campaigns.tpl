@@ -7,7 +7,7 @@
  *
  * Copyright 2018 Jacques Marneweck.  All rights strictly reserved.
  *}
-{include file="../admin__header.tpl" title="Outbound Sales &mdash; Campaigns" nav="home"}
+{include file="../admin__header.tpl" title="Outbound Sales &mdash; Campaigns" nav="salestools"}
 
 <div class="page-header">
   <div class="pull-right">
@@ -16,7 +16,7 @@
   <h2>Campaigns</h2>
 </div>
 
-<table class="table table-striped table-bordered table-condensed">
+<table class="table table-stripped table-bordered">
   <thead>
     <tr>
       <th>#</th>
@@ -24,6 +24,7 @@
       <th>Created At</th>
       <th>Created By</th>
       <th>Active</th>
+      <th>Leads</th>
       <th>Links</th>
     </tr>
   </thead>
@@ -35,6 +36,7 @@
       <td>{$row->created_at|datetz}</td>
       <td>{$row->created_by|staff_name|escape}</td>
       <td>{$row->active}</td>
+      <td>{$row->outbound_campaign_leads()->count()}</td>
       <td>
         <a href="/admin/outboundsales/campaigns/{$row->id}/leads">Leads</a>
         |
@@ -53,6 +55,7 @@
       <th>Created At</th>
       <th>Created By</th>
       <th>Active</th>
+      <th>Leads</th>
       <th>Links</th>
   </tfoot>
 </table>
