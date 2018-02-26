@@ -9,7 +9,9 @@
 
 use Leopardrock\Pagination;
 use Plutus\Models\Account;
+use Plutus\Models\AgencyUser;
 use Plutus\Models\OutboundCampaign;
+use Plutus\Models\OutboundCampaignLead;
 use Plutus\Models\OutboundSale;
 use Plutus\Models\User;
 
@@ -18,35 +20,28 @@ use Plutus\Models\User;
  */
 $app->get('/admin/outboundsales', $authenticate($app), $is_admin($app), function () use ($app)
     {
-        /**
-         * We want to not select any of Sybille's userbase here.  Just IMOGO users.
-         */
-        $user = User::whereNull('source_id')
-            ->inRandomOrder()
-            ->firstOrFail();
+        $campaigns = OutboundCampaign::where('active', 1)
+            ->get();
 
         $app->template->bulkAssign([
-            'user' => $user,
+            'campaigns' => $campaigns,
         ]);
-        $app->template->display('outboundsales/index.tpl');
+        $app->template->display('outboundsales/outboundsales.tpl');
     }
 );
 
-$app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), function () use ($app)
+$app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), function ($id) use ($app)
     {
-        /**
-         * We want to not select any of Sybille's userbase here.  Just IMOGO users.
-         */
-        $user = User::whereNull('source_id')
-            ->inRandomOrder()
-            ->firstOrFail();
+        $campaign = OutboundCampaign::findOrFail($id);
+        $user = $campaign->outbound_campaign_leads()->inRandomOrder()->first()->user()->first();
 
         $app->template->bulkAssign([
+            'campaign' => $campaign,
             'user' => $user,
         ]);
         $app->template->display('outboundsales/index.tpl');
     }
-);
+)->conditions(['id' => '\d+']);
 
 $app->get('/admin/outboundsales/campaigns', $authenticate($app), $is_admin($app), function () use ($app)
     {
@@ -79,6 +74,28 @@ $app->get('/admin/outboundsales/campaigns/new', $authenticate($app), $is_admin($
     }
 );
 
+$app->get('/admin/outboundsales/campaigns/:id/leads', $authenticate($app), $is_admin($app), function ($id) use ($app)
+    {
+        if (
+            !is_superadmin() &&
+            !is_financeadmin()
+        ) {
+            $app->notFound();
+        }
+
+        $campaign = OutboundCampaign::findOrFail($id);
+
+        $app->template->bulkAssign([
+            'campaign' => $campaign,
+            'leads' => $campaign->outbound_campaign_leads()->get(),
+        ]);
+        $app->template->display('outboundsales/campaigns__leads.tpl');
+    }
+);
+
+/**
+ * Issue the dialler to the user.
+ */
 $app->post('/admin/outboundsales/:uuid/issuedialler', $authenticate($app), $is_admin($app), function ($uuid) use ($app, $config)
     {
         try {
