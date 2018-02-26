@@ -9,7 +9,12 @@
  *}
 {include file="../admin__header.tpl" title="Outbound Sales &mdash; Campaigns" nav="home"}
 
-<h2 class="page-header">Campaigns</h2>
+<div class="page-header">
+  <div class="pull-right">
+    <a href="/admin/outboundsales/campaigns/new" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i> Add new Campaign</a>
+  </div>
+  <h2>Campaigns</h2>
+</div>
 
 <table class="table table-striped table-bordered table-condensed">
   <thead>
@@ -19,6 +24,7 @@
       <th>Created At</th>
       <th>Created By</th>
       <th>Active</th>
+      <th>Links</th>
     </tr>
   </thead>
   <tbody>
@@ -27,12 +33,17 @@
       <td>{$row->id}</td>
       <td>{$row->name|escape}</td>
       <td>{$row->created_at|datetz}</td>
-      <td>{$row->created_by}</td>
+      <td>{$row->created_by|staff_name|escape}</td>
       <td>{$row->active}</td>
+      <td>
+        <a href="/admin/outboundsales/campaigns/{$row->id}/leads">Leads</a>
+        |
+        <a href="/admin/outboundsales/campaigns/{$row->id}/sales">Sales</a>
+      </td>
     </tr>
 {foreachelse}
     <tr>
-      <td colspan="5">You presently do not have any campaigns defined.  <a href="/admin/outboundsales/campaigns/new">Create a new Campaign</a>.
+      <td colspan="6">You presently do not have any campaigns defined.  <a href="/admin/outboundsales/campaigns/new">Create a new Campaign</a>.
     </tr>
 {/foreach}
   </tbody>
@@ -42,6 +53,7 @@
       <th>Created At</th>
       <th>Created By</th>
       <th>Active</th>
+      <th>Links</th>
   </tfoot>
 </table>
 
