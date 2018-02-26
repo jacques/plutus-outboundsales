@@ -121,27 +121,124 @@
     </p>
 
     <p>
+      I have an exciting offer.
+    </p>
+
+    <p>
       IMOGO has a very exciting offer for our customers.  The Telkom Sim Sonke Sim Card as well as
       monthly airtime and cheap international calls.
     </p>
 
     <p>
-      How much money do you spend on airtime every month?
+      How much airtime do you use every month?
     </p>
 
     <p>
-      ZAR <input type="text" value="">
+      <strong>ZAR</strong> <input type="text" value="" name="monthly_airtime_spend" id="monthly_airtime_spend">
     </p>
 
     <p>
-      The package provides you with:
+      As a valued customer of IMOGO, not only can I double your talk time or even triple your talk time.
+    </p>
 
-      <ul>
-        <li>100GiB of data</li>
-        <li>Unlimited Telkom to Telkom minutes</li>
-        <li>10GiB of Telkom Wifi Data</li>
-        <li>Free Whatapp</li>
-      </ul>
+    <div id="two">
+      <h3 class="page-header">PACKAGE TWO</h3>
+
+      <p>
+        Fantastic we have a R 200/month package.
+      </p>
+
+      <p>
+        We will supply you with a SIM.  Don't worry you will keep your existing cell number.   Double your
+        data etc.
+      </p>
+
+      <p>
+        The package provides you with:
+
+        <ul>
+          <li>1GiB of data</li>
+          <li>300 Telkom to Telkom minutes</li>
+          <li>10GiB of Telkom Wifi Data</li>
+          <li>100 SMS Message</li>
+          <li>500Mb Free Whatapp Data</li>
+        </ul>
+      </p>
+    </div>
+
+    <div id="three">
+      <h3 class="page-header">THREE</h3>
+
+      <p>
+        Fantastic we have a R 300/month package.
+      </p>
+
+      <p>
+        We will supply you with a SIM.  Don't worry you will keep your existing cell number.   Double your
+        data etc.
+      </p>
+
+      <p>
+        The package provides you with:
+
+        <ul>
+          <li>1GiB of data</li>
+          <li>300 Telkom to Telkom minutes</li>
+          <li>10GiB of Telkom Wifi Data</li>
+          <li>100 SMS Message</li>
+          <li>500Mb Free Whatapp Data</li>
+        </ul>
+      </p>
+    </div>
+
+    <div id="four">
+      <h3 class="page-header">FOUR</h3>
+
+      <p>
+        Fantastic we have a R 400/month package.
+      </p>
+
+      <p>
+        We will supply you with a SIM.  Don't worry you will keep your existing cell number.   Double your
+        data etc.
+      </p>
+
+      <p>
+        The package provides you with:
+
+        <ul>
+          <li>1GiB of data</li>
+          <li>300 Telkom to Telkom minutes</li>
+          <li>10GiB of Telkom Wifi Data</li>
+          <li>100 SMS Message</li>
+          <li>500Mb Free Whatapp Data</li>
+        </ul>
+      </p>
+    </div>
+
+    <p>
+      Included in your R 200 is R 10000 funeral cover.
+{if $user->id_type == 1}
+        As a South African we can double your funeral cover.
+{else}
+        As a foreigner we can repatriate your body home.
+{/if}
+    </p>
+
+    <p>
+      You get a free last will and testament.  You don't have to take this up.  If you die without a will the state takes everything.
+    </p>
+
+    <p>
+      Is your estate worth more than R 250k?
+    </p>
+
+    <p>
+      We are going to give you special airtime.  For just R 200.
+    </p>
+
+    <p>
+      As an existing IMOGO customer, we are going to give you a R 300 gift voucher for when you buy your next cellphone from Phones4U Warehouse.
     </p>
 
     <p>
@@ -176,6 +273,10 @@
 
     <p>
       Please confirm your ID number {$user->last_name|escape} (expect {$user->id_document_number|escape}).
+    </p>
+
+    <p>
+      RAM will courier the package to you within the next 24 hours after this phone call.
     </p>
 
     <p>
@@ -278,6 +379,30 @@ jQuery(document).ready(function(){
   $('#wallet').show();
   $('#debitorder').hide();
   $('#creditcard').hide();
+});
+
+jQuery(document).ready(function(){
+  $('#monthly_airtime_spend').change(function(){
+    var monthly_airtime_spend = $('#monthly_airtime_spend').val();
+
+    if (monthly_airtime_spend < 201) {
+        $('#two').show();
+        $('#three').hide();
+        $('#four').hide();
+    } else if (monthly_airtime_spend < 301) {
+        $('#two').hide();
+        $('#three').show();
+        $('#four').hide();
+    } else if (monthly_airtime_spend < 401) {
+        $('#two').hide();
+        $('#three').hide();
+        $('#four').show();
+    }
+  }).change();
+
+  $('#two').hide();
+  $('#three').hide();
+  $('#four').hide();
 });
 {/literal}
     </script>
