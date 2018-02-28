@@ -424,7 +424,7 @@ $('#call-noanswer').click(function() {
     data: {"call_status":"noanswer","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
     success: function( returnedData ) {
       $( '#callstatus' ).html( '<p>Call Status updated on Call Record.</p>' );
-      location.reload();
+      location.reload(true);
     }
   });
 });
@@ -436,7 +436,7 @@ $('#call-busy').click(function() {
     data: {"call_status":"busy","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
     success: function( returnedData ) {
       $( '#callstatus' ).html( '<p>Call Status updated on Call Record.</p>' );
-      location.reload();
+      location.reload(true);
     }
   });
 });
@@ -448,7 +448,7 @@ $('#call-voicemail').click(function() {
     data: {"call_status":"voicemail","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
     success: function( returnedData ) {
       $( '#callstatus' ).html( '<p>Call Status updated on Call Record.</p>' );
-      location.reload();
+      location.reload(true);
     }
   });
 });
