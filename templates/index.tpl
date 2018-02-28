@@ -44,14 +44,16 @@
       </tbody>
     </table>
 
-    <p>
-      <strong>Call Status</strong>:
+    <div id="callstatus">
+      <p>
+        <strong>Call Status</strong>:
 
-      <input type="button" id="call-noanswer" class="btn btn-danger" value="No Answer">
-      <input type="button" id="call-busy" class="btn btn-danger" value="Busy">
-      <input type="button" id="call-voicemail" class="btn btn-danger" value="Went to Voicemail">
-      <input type="button" id="call-answered" class="btn btn-primary" value="Answered">
-    </p>
+        <input type="button" id="call-noanswer" class="btn btn-danger" value="No Answer">
+        <input type="button" id="call-busy" class="btn btn-danger" value="Busy">
+        <input type="button" id="call-voicemail" class="btn btn-danger" value="Went to Voicemail">
+        <input type="button" id="call-answered" class="btn btn-primary" value="Answered">
+      </p>
+    </div>
 
     <p>
       Good day.  Can I please speak to <strong>{$user->first_name|escape} {$user->last_name|escape}</strong>?
@@ -64,8 +66,18 @@
 
     <p>
       Hi it's {$smarty.session.first_name|escape} calling you from IMOGO.
+    </p>
 
-      Is it a good time to introduce you to our amazing Telkom and BongoTel offering?
+    <p>
+      Please note all calls are recorded for your protection and ours. (Ursula to supply wording here).
+    </p>
+
+    <p>
+      Can you please give me your {if $user->id_type == 1}Idenity Number{elseif $user->id_type == 2}Passport Number{elseif $user->id_type == 3}Asylum Document Number{/if}.  (User should give you <strong>{$user->id_document_number}</strong>).
+    </p>
+
+    <p>
+      Is it a convenient time to talk?
     </p>
   </div>
   <div class="col-lg-6">
@@ -145,11 +157,11 @@
       <h3 class="page-header">PACKAGE TWO</h3>
 
       <p>
-        Fantastic we have a R 200/month package.
+        Fantastic we have a R 200/month package just for you with a R200 once off registration fee.
       </p>
 
       <p>
-        We will supply you with a SIM.  Don't worry you will keep your existing cell number.   Double your
+        We will supply you with a Telkom Simsonke SIM Card.  Don't worry you will keep your existing phone number.   Double your
         data etc.
       </p>
 
@@ -403,6 +415,53 @@ jQuery(document).ready(function(){
   $('#two').hide();
   $('#three').hide();
   $('#four').hide();
+});
+
+$('#call-noanswer').click(function() {
+   $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/callstatus",
+    data: {"call_status":"noanswer","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
+    success: function( returnedData ) {
+      $( '#callstatus' ).html( '<p>Call Status updated on Call Record.</p>' );
+      location.reload();
+    }
+  });
+});
+
+$('#call-busy').click(function() {
+   $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/callstatus",
+    data: {"call_status":"busy","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
+    success: function( returnedData ) {
+      $( '#callstatus' ).html( '<p>Call Status updated on Call Record.</p>' );
+      location.reload();
+    }
+  });
+});
+
+$('#call-voicemail').click(function() {
+   $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/callstatus",
+    data: {"call_status":"voicemail","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
+    success: function( returnedData ) {
+      $( '#callstatus' ).html( '<p>Call Status updated on Call Record.</p>' );
+      location.reload();
+    }
+  });
+});
+
+$('#call-answered').click(function() {
+   $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/callstatus",
+    data: {"call_status":"answered","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
+    success: function( returnedData ) {
+      $( '#callstatus' ).html( '<p>Call Status updated on Call Record.</p>' );
+    }
+  });
 });
 {/literal}
     </script>
