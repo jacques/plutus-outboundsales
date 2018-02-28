@@ -7,19 +7,25 @@
  * @package   OutboundSales
  */
 
+use Illuminate\Database\Capsule\Manager as DB;
 use Leopardrock\Pagination;
+use Leopardrock\UUID;
 use Plutus\Models\Account;
 use Plutus\Models\AgencyUser;
+use Plutus\Models\OutboundCall;
 use Plutus\Models\OutboundCampaign;
 use Plutus\Models\OutboundCampaignLead;
 use Plutus\Models\OutboundSale;
 use Plutus\Models\User;
 
 /**
- * Sales Script Page
+ * Show the outbound campaigns an agent is allowed to dial.
  */
 $app->get('/admin/outboundsales', $authenticate($app), $is_admin($app), function () use ($app)
     {
+        /**
+         * @TODO Filter on campaigns by agent.
+         */
         $campaigns = OutboundCampaign::where('active', 1)
             ->get();
 
@@ -30,18 +36,54 @@ $app->get('/admin/outboundsales', $authenticate($app), $is_admin($app), function
     }
 );
 
+/**
+ * Sales Script Page
+ */
 $app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), function ($id) use ($app)
     {
         $campaign = OutboundCampaign::findOrFail($id);
+        if (!$campaign->active) {
+            $app->notFound();
+        }
+
         $user = $campaign->outbound_campaign_leads()->inRandomOrder()->first()->user()->first();
+
+        $call = new OutboundCall;
+        $call->uuid = UUID::uuidv4();
+        $call->user_id = $user->id;
+        $call->outbound_campaign_id = $campaign->id;
+        $call->staff_id = $_SESSION['user_id'];
+        $call->save();
 
         $app->template->bulkAssign([
             'campaign' => $campaign,
             'user' => $user,
+            'call' => $call,
         ]);
         $app->template->display('outboundsales/index.tpl');
     }
 )->conditions(['id' => '\d+']);
+
+$app->post('/admin/outboundsales/calls/:uuid/callstatus', $authenticate($app), $is_admin($app), function ($uuid) use ($app)
+    {
+        $post = $app->request()->post();
+
+        try {
+            $call = OutboundCall::where('uuid', $uuid)->firstOrFail();
+        } catch (\Exception $e) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+        $call->call_status = $post['call_status'];
+        $call->save();
+
+        echo json_encode([
+            'status' => 'ok',
+        ]);
+    }
+);
 
 $app->get('/admin/outboundsales/campaigns', $authenticate($app), $is_admin($app), function () use ($app)
     {
