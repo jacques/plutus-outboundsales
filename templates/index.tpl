@@ -23,6 +23,12 @@
       </p>
     </div>
 
+<div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+    <span class="sr-only">45% Complete</span>
+  </div>
+</div>
+
     <table class="table table-bordered table-condensed small">
       <thead>
         <tr>
@@ -56,7 +62,7 @@
     </div>
 
     <p>
-      Good day.  Can I please speak to <strong>{$user->first_name|escape} {$user->last_name|escape}</strong>?
+      Good day.  Can I please speak with <strong>{$user->first_name|escape} {$user->last_name|escape}</strong>?
     </p>
 
     <p>
@@ -69,15 +75,15 @@
     </p>
 
     <p>
+      Is it a convenient time to talk?
+    </p>
+
+    <p>
       Please note all calls are recorded for your protection and ours. (Ursula to supply wording here).
     </p>
 
     <p>
       Can you please give me your {if $user->id_type == 1}Idenity Number{elseif $user->id_type == 2}Passport Number{elseif $user->id_type == 3}Asylum Document Number{/if}.  (User should give you <strong>{$user->id_document_number}</strong>).
-    </p>
-
-    <p>
-      Is it a convenient time to talk?
     </p>
   </div>
   <div class="col-lg-6">
@@ -137,24 +143,42 @@
     </p>
 
     <p>
-      IMOGO has a very exciting offer for our customers.  The Telkom Sim Sonke Sim Card as well as
-      monthly airtime and cheap international calls.
+      IMOGO has a very exciting offer for our customers.  The Freedom Connect 400, 600 and 800.
     </p>
 
+<div class="row">
+  <div class="col-md-6">
     <p>
-      How much airtime do you use every month?
+      How much do you spend on airtime every month?
     </p>
+  </div>
 
+  <div class="col-md-6">
     <p>
-      <strong>ZAR</strong> <input type="text" value="" name="monthly_airtime_spend" id="monthly_airtime_spend">
+      <strong>ZAR</strong> <input class="form-control" type="text" value="" name="monthly_airtime_spend" id="monthly_airtime_spend">
+(put dropdown for < R200; < 300 > 300)
     </p>
+  </div>
+</div>
+<div class="row">
+<div class="col-md-6">
+    <p>
+      How much do you spend on data every month?
+    </p>
+</div>
+<div class="col-md-6">
+    <p>
+      <strong>ZAR</strong> <input class="form-control" type="text" value="" name="monthly_data_spend" id="monthly_data_spend">
+    </p>
+</div>
+</div>
 
     <p>
       As a valued customer of IMOGO, not only can I double your talk time or even triple your talk time.
     </p>
 
     <div id="two">
-      <h3 class="page-header">PACKAGE TWO</h3>
+      <h3 class="page-header">FREEDOM CONNECT FOUR HUNDRED</h3>
 
       <p>
         Fantastic we have a R 200/month package just for you with a R200 once off registration fee.
@@ -169,7 +193,7 @@
         The package provides you with:
 
         <ul>
-          <li>1GiB of data</li>
+          <li>2GiB of data</li>
           <li>300 Telkom to Telkom minutes</li>
           <li>10GiB of Telkom Wifi Data</li>
           <li>100 SMS Message</li>

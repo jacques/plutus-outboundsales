@@ -12,6 +12,7 @@ use Leopardrock\Pagination;
 use Leopardrock\UUID;
 use Plutus\Models\Account;
 use Plutus\Models\AgencyUser;
+use Plutus\Models\Bank;
 use Plutus\Models\OutboundCall;
 use Plutus\Models\OutboundCampaign;
 use Plutus\Models\OutboundCampaignLead;
@@ -55,10 +56,16 @@ $app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), func
         $call->staff_id = $_SESSION['user_id'];
         $call->save();
 
+        $banks = Bank::where('country_id', '177')
+            ->whereNotIn('id', [1])
+            ->orderBy('bank_name', 'ASC')
+            ->get();
+
         $app->template->bulkAssign([
             'campaign' => $campaign,
             'user' => $user,
             'call' => $call,
+            'banks' => $banks,
         ]);
         $app->template->display('outboundsales/index.tpl');
     }
@@ -77,6 +84,27 @@ $app->post('/admin/outboundsales/calls/:uuid/callstatus', $authenticate($app), $
             ]);
         }
         $call->call_status = $post['call_status'];
+        $call->save();
+
+        echo json_encode([
+            'status' => 'ok',
+        ]);
+    }
+);
+
+$app->post('/admin/outboundsales/calls/:uuid/paymentmethod', $authenticate($app), $is_admin($app), function ($uuid) use ($app)
+    {
+        $post = $app->request()->post();
+
+        try {
+            $call = OutboundCall::where('uuid', $uuid)->firstOrFail();
+        } catch (\Exception $e) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+        $call->payment_method = $post['payment_method'];
         $call->save();
 
         echo json_encode([
@@ -132,6 +160,24 @@ $app->get('/admin/outboundsales/campaigns/:id/leads', $authenticate($app), $is_a
             'leads' => $campaign->outbound_campaign_leads()->get(),
         ]);
         $app->template->display('outboundsales/campaigns__leads.tpl');
+    }
+);
+
+$app->get('/admin/outboundsales/campaigns/qa', $authenticate($app), $is_admin($app), function () use ($app)
+    {
+        if (
+            !is_superadmin() &&
+            !is_financeadmin()
+        ) {
+            $app->notFound();
+        }
+
+        $query = OutboundSale::orderBy('id', 'DESC');
+        $data = Pagination::paginate($app, 0, 50, 1, $query);
+        $app->template->bulkAssign([
+            'data' => $data,
+        ]);
+        $app->template->display('outboundsales/campaigns__qa.tpl');
     }
 );
 
