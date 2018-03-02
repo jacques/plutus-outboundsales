@@ -65,6 +65,15 @@
       Good day.  Can I please speak with <strong>{$user->first_name|escape} {$user->last_name|escape}</strong>?
     </p>
 
+    <div id="reachedcustomer">
+      <p>
+        <strong>Got this customer?</strong>:
+
+        <input type="button" id="reached-customer" class="btn btn-primary" value="Yes">
+        <input type="button" id="customer-not-available" class="btn btn-danger" value="Customer Not Available">
+        <input type="button" id="msisdn-recycled" class="btn btn-danger" value="MSISDN Recycled">
+      </p>
+    </div>
 
     <p>
 <div class="row">
@@ -161,11 +170,12 @@
 
     <table class="table">
       <tr>
-        <td>Are you on prepaid or contract?</td>
+        <td>Are you on prepaid or contract or contract with topup?</td>
         <td>
           <select class="form-control" name="prepaid_or_contract" id="prepaid_or_contract">
             <option value="-1">Select Option</option>
             <option value="contract">Contract</option>
+            <option value="hybrid">Contract with Topup</option>
             <option value="prepaid">Prepaid</option>
           </select>
         </td>
