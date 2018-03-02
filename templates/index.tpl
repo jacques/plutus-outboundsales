@@ -65,25 +65,46 @@
       Good day.  Can I please speak with <strong>{$user->first_name|escape} {$user->last_name|escape}</strong>?
     </p>
 
+
     <p>
 <div class="row">
   <div class="col-lg-6">
     <h3 class="page-header">Customer is on other end of the phone</h3>
 
     <p>
-      Hi it's {$smarty.session.first_name|escape} calling you from IMOGO.
+    How are you? (wait for customers answer)
     </p>
 
     <p>
-      Is it a convenient time to talk?
+    I am good thanks!
     </p>
 
     <p>
-      Please note all calls are recorded for your protection and ours. (Ursula to supply wording here).
+      You are speaking to {$smarty.session.first_name|escape}, I am a consulant from IMOGO.
     </p>
 
     <p>
-      Can you please give me your {if $user->id_type == 1}Idenity Number{elseif $user->id_type == 2}Passport Number{elseif $user->id_type == 3}Asylum Document Number{/if}.  (User should give you <strong>{$user->id_document_number}</strong>).
+      {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} please be advised - all calls are recorded for your security and training purposes.
+    </p>
+
+    <p>
+      Do you have a few minutes {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} that you can spare?
+    </p>
+
+    <p>
+      Can you confirm your {if $user->id_type == 1}Idenity Number{elseif $user->id_type == 2}Passport Number{elseif $user->id_type == 3}Asylum Document Number{/if}.  (User should give you <strong>{$user->id_document_number}</strong>).
+    </p>
+
+    <p>
+      Thank you very much.
+    </p>
+
+    <p>
+      {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} as one of our valued clients firstly I would like to introduce and offer you some of our new products.
+    </p>
+
+    <p>
+      We have our 3 freedom connect packages but before I explain further about our freedom connect deals I would like to ask you if:
     </p>
   </div>
   <div class="col-lg-6">
@@ -138,54 +159,167 @@
 </div>
     </p>
 
-    <p>
-      I have an exciting offer.
-    </p>
+    <table class="table">
+      <tr>
+        <td>Are you on prepaid or contract?</td>
+        <td>
+          <select class="form-control" name="prepaid_or_contract" id="prepaid_or_contract">
+            <option value="-1">Select Option</option>
+            <option value="contract">Contract</option>
+            <option value="prepaid">Prepaid</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Which service provider are you with?</td>
+        <td><input type="text" name="service_provider" id="service_provider" class="form-control"></td>
+      </tr>
+      <tr>
+         <td>How much airtime do you use monthly?</td>
+         <td>
+          <select class="form-control" name="monthly_airtime_spend" id="monthly_airtime_spend">
+            <option value="-1">Select Option</option>
+            <option value="200">&lt; 200</option>
+            <option value="300">&lt; 300</option>
+            <option value="400">&gt; 300</option>
+          </select>
+         </td>
+      </tr>
+      <tr>
+         <td>How much data do you use monthly?</td>
+         <td>
+          <select class="form-control" name="monthly_data_spend" id="monthly_data_spend">
+            <option value="-1">Select Option</option>
+            <option value="200">&lt; 200</option>
+            <option value="300">&lt; 300</option>
+            <option value="400">&gt; 300</option>
+          </select>
+         </td>
+      </tr>
+    </table>
 
     <p>
-      IMOGO has a very exciting offer for our customers.  The Freedom Connect 400, 600 and 800.
+      Okay {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} that is greate because we have an amazing deal that we can offer you where
+      you can save on airtime and data.
     </p>
 
-<div class="row">
-  <div class="col-md-6">
-    <p>
-      How much do you spend on airtime every month?
-    </p>
-  </div>
-
-  <div class="col-md-6">
-    <p>
-      <strong>ZAR</strong> <input class="form-control" type="text" value="" name="monthly_airtime_spend" id="monthly_airtime_spend">
-(put dropdown for < R200; < 300 > 300)
-    </p>
-  </div>
-</div>
-<div class="row">
-<div class="col-md-6">
-    <p>
-      How much do you spend on data every month?
-    </p>
-</div>
-<div class="col-md-6">
-    <p>
-      <strong>ZAR</strong> <input class="form-control" type="text" value="" name="monthly_data_spend" id="monthly_data_spend">
-    </p>
-</div>
-</div>
-
-    <p>
-      As a valued customer of IMOGO, not only can I double your talk time or even triple your talk time.
-    </p>
 
     <div id="two">
       <h3 class="page-header">FREEDOM CONNECT FOUR HUNDRED</h3>
 
       <p>
-        Fantastic we have a R 200/month package just for you with a R200 once off registration fee.
+         {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} we have our Freedom Connect 400 deal but we also have the Freedom Connect 600
+         and Freedom Connect 800 deals but I want to introduce you to the Freedom Connect 400 deal.
       </p>
 
       <p>
-        We will supply you with a Telkom Simsonke SIM Card.  Don't worry you will keep your existing phone number.   Double your
+        We double the airitme from R 200 to R 400 and you still pay R 200.
+      </p>
+
+      <p>
+        This is what you get for R 200:
+      </p>
+
+      <ul>
+        <li>A Telkom SIM</li>
+        <li>The Bongotel App</li>
+        <li>Funeral Cover</li>
+        <li>A R300 Gift Voucher</li>
+        <li>A Last Will and Testament</li>
+      </ul>
+
+      <p>
+      For the Telkom Sim
+      </p>
+
+      <ul>
+        <li>You get our Telkom Simsonke Simcard and you get to keep your number and we do a port me for you and you pay R 200 a month and you get R 400 airitime
+          and you also get 300 free minutes Tekom to Telkom and it's fre to call a landline.</li>
+        <li>And you get the double the value of on the recharge amount</li>
+      </ul>
+
+      <p>
+        And you also get
+      </p>
+
+      <ul>
+        <li>1GB of Internet bundle (data)</li>
+        <li>10GB of WIFI data that you can use anttime when you go out for shopping you can download videos and movies with that 10GB wifi data</li>
+        <li>100 SMS message you can use to send birthday wishes to your loved ones</li>
+        <li>500Mb whatspp bundle you can use to make voice calls and video calls on whats app.</li>
+      </ul>
+
+      <p>
+        Funeral Cover
+      </p>
+
+      <ul>
+        <li>And then R 10000 of funeral cover but you are the main member (may I ask if you are married {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape})? Y/N
+Do you have kids?
+
+Because you can also add your spouse and your parents and your kids for a small additional premium.
+        <li>If you feel that you have more value to your life we do have the cover for R 15000, R 20000 and R 30000 and we also offering 
+{if $user->id_type == 1}
+        to double your funeral cover to R 20000 as you are a South African citizen.
+{else}
+        as a foreigner we can repatriate your body home.
+{/if}
+
+      <p>
+        BongoTel
+      </p>
+
+      <p>
+        And you also receive our Bongotel app and we will load R 10 airitme to start off with on the app.  Our Bongotel app has the lost cost calling of which
+        I am sending the link as we speak.   (Ask for email address above? And confirm mobile number?)
+      </p>
+
+      <p>
+        Once you have received the link you will need to down load the Bongotel app onto your phone from the playstore or appstore.
+      </p>
+
+      <p>
+        With this app you make free calls to our users of the BongoTel app and pay less for a local call that what you would currently pay on any other
+        service provided and you can travel the world with no roaming charges.
+      </p>
+
+      <p>
+        R 300 Gift Voucher
+      </p>
+
+      <p>
+        And we also give you a R 300 Gift Voucher loaded to your wallet that you can use for a discount on your net handset because we have amazing deals.  We
+        have Apple iPhones and Samsung Phones for half price since you are our valued customer and you can go to our website to view more handsets.  The
+        gift voucher is validd fro 90 days and we have the option to lay-by a phone and use the gift voucher towards your lay-by deposit.
+      </p>
+
+      <p>
+        Last will and testament
+      </p>
+
+      <p>
+        You also get a last will and testament that will assist you to ensure that your beneficiaries will divide your legacy in the way you intended it should your
+        state be valued at more than R 250000 then a consultant will call you back with more information.
+      </p>
+
+      <p>
+        May I ask how much your state is worth?
+      </p>
+      <p>
+      < 250
+     > 250
+      </p>
+    </div>
+
+    <div id="three">
+      <h3 class="page-header">FREEDOM CONNECT SIX HUNDRED</h3>
+
+      <p>
+        Fantastic we have a R 300/month package just for you.
+      </p>
+
+      <p>
+        We will supply you with a SIM.  Don't worry you will keep your existing cell number.   Double your
         data etc.
       </p>
 
@@ -202,36 +336,11 @@
       </p>
     </div>
 
-    <div id="three">
-      <h3 class="page-header">THREE</h3>
-
-      <p>
-        Fantastic we have a R 300/month package.
-      </p>
-
-      <p>
-        We will supply you with a SIM.  Don't worry you will keep your existing cell number.   Double your
-        data etc.
-      </p>
-
-      <p>
-        The package provides you with:
-
-        <ul>
-          <li>1GiB of data</li>
-          <li>300 Telkom to Telkom minutes</li>
-          <li>10GiB of Telkom Wifi Data</li>
-          <li>100 SMS Message</li>
-          <li>500Mb Free Whatapp Data</li>
-        </ul>
-      </p>
-    </div>
-
     <div id="four">
-      <h3 class="page-header">FOUR</h3>
+      <h3 class="page-header">FREEDOM CONNECT EIGHT HUNDRED</h3>
 
       <p>
-        Fantastic we have a R 400/month package.
+        Fantastic we have a R 400/month package just for you.
       </p>
 
       <p>
@@ -244,7 +353,7 @@
 
         <ul>
           <li>1GiB of data</li>
-          <li>300 Telkom to Telkom minutes</li>
+          <li>300 Telkom to Telkom minutes (with a bonus of double the airtime which expires after 7 days)</li>
           <li>10GiB of Telkom Wifi Data</li>
           <li>100 SMS Message</li>
           <li>500Mb Free Whatapp Data</li>
@@ -262,19 +371,46 @@
     </p>
 
     <p>
-      You get a free last will and testament.  You don't have to take this up.  If you die without a will the state takes everything.
+      There is too much value.
     </p>
 
     <p>
+      We have a registration fee of R 200 it's a once off fee and you get your freedom connect combo within the next 48 hours after your first payment
+      is received by IMOGO.  The greate part is that you can split the registration and the package fee.
+    </p>
+
+    <p>
+      Do you want to pay the R 200 registration fee and then on the first of the month you can pay your package fee?
+    </p>
+
+    <p>
+      Upon reciept of the registration fee, we will courier your Telkom Simsonke Simcard to you.  You will need to have proof of identity and proof of
+      address when RAM comes to deliver your sim card.
+    </p>
+
+    <p>
+      {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} isnt't this a great deal?
+    </p>
+
+    <p>
+      Can I sign you up {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape}?
+    </p>
+
+    <p>
+      And would you like to pay by credit card, debit order, you can even pay via your IMOGO wallet!
+    <p>
+
+    <p>
       Is your estate worth more than R 250k?
+
+      <select name="estate_worth_less_250k">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
     </p>
 
     <p>
       We are going to give you special airtime.  For just R 200.
-    </p>
-
-    <p>
-      As an existing IMOGO customer, we are going to give you a R 300 gift voucher for when you buy your next cellphone from Phones4U Warehouse.
     </p>
 
     <p>
@@ -304,12 +440,27 @@
     </p>
 
     <p>
-      May I go ahead and get your details for your activation of your IMOGO BongoTel Telkom Sim Sonke product?
+      May I go ahead and get your details for your activation of your Freedom Connect package?
     </p>
 
     <p>
       Please confirm your ID number {$user->last_name|escape} (expect {$user->id_document_number|escape}).
     </p>
+
+{if empty($user->email_address)}
+    <p>
+      Could you tell me what your email address is so that I can issue you with R10.00 BongoTel credit.
+    </p>
+
+    <p>
+      <input type="text" name="email_address" placeholder="Email Address" value="" id="email-address">
+    </p>
+{/if}
+
+    <p>
+      <button type="button" class="btn btn-info" id="bongotel-issue-dialler">Issue BongoTel Dialler</button>
+    </p>
+
 
     <p>
       RAM will courier the package to you within the next 24 hours after this phone call.
@@ -336,19 +487,6 @@
         subscription which includes the banking details to use as well as how deposit at Boxer, Pick 'n Pay,
         Checkers, Shoprite and Spar if that is more convient for you.
       </p>
-
-      <p>
-
-      </p>
-      <form>
-        <table class="table table-bordered table-stripped">
-          <thead>
-            <tr>
-              <th>Select Wallet</th>
-            </tr>
-          </thead>
-        </table>
-      </form>
     </div>
     <div id="debitorder">
       <h2 class="page-header">Debit Order</h2>
@@ -358,7 +496,49 @@
       </p>
 
       <p>
+        Please note that your debit order for your registration fee will come off your account within the next three
+        business days.
+      </p>
 
+      <p>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputBank" class="col-sm-2 control-label">Bank</label>
+    <div class="col-sm-10">
+      <select name="bank_id" class="form-control" id="inputBankId">
+{foreach $banks item=bank}
+        <option value="{$bank->id}">{$bank->bank_name}</option>
+{/foreach}
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAccountNumber" class="col-sm-2 control-label">Account Number</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputAccount Number" placeholder="Account Number">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputBranchCode" class="col-sm-2 control-label">Branch Code</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputBranchCode" placeholder="Branch Code">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAccountType" class="col-sm-2 control-label">Account Type</label>
+    <div class="col-sm-10">
+      <select name="account_type" class="form-control" id="inputAccountType">
+        <option value="1">Current</option>
+        <option value="2">Savings</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="paymethod-debitorder" type="submit" class="btn btn-default">Store Banking Details</button>
+    </div>
+  </div>
+</form>
       </p>
       <form>
       </form>
@@ -374,16 +554,12 @@
     </div>
 
     <p>
-      May I interest you with one of our exciting cellphones?   Blurb goes here.
+      In the case that no longer want to combo you can cancel at anytime and there is no cancellation fee.
     </p>
 
 
     <p>
-
-    </p>
-
-    <p>
-      May I interest you with one of our exciting cellphones?   Blurb goes here.
+      Do you have any questions {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape}?
     </p>
 
 
@@ -410,6 +586,15 @@ jQuery(document).ready(function(){
       $('#debitorder').hide();
       $('#creditcard').show();
     }
+
+    $.ajax({
+      type: "POST",
+      url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/paymentmethod",
+      data: {"payment_method":selected,"{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
+      success: function( returnedData ) {
+        $( '#paymentmethod' ).html( '<p>Payment Method updated on Call Record.</p>' );
+      }
+    });
   }).change();
 
   $('#wallet').show();
@@ -484,6 +669,28 @@ $('#call-answered').click(function() {
     data: {"call_status":"answered","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
     success: function( returnedData ) {
       $( '#callstatus' ).html( '<p>Call Status updated on Call Record.</p>' );
+    }
+  });
+});
+
+$('#issue-bongotel-dialler').click(function() {
+   $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/diallers/issue",
+    data: {"call_status":"answered","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
+    success: function( returnedData ) {
+      $( '#bongotel' ).html( '<p>BongoTel dialler issued to the user.  SMS should arrive shortly.</p>' );
+    }
+  });
+});
+
+$('#email-card-link').click(function() {
+   $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/email/cardlink",
+    data: {"call_status":"answered","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
+    success: function( returnedData ) {
+      $( '#email-card-link' ).html( '<p>Email sent to user with the credit card tokenisation link.</p>' );
     }
   });
 });
