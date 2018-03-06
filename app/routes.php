@@ -71,6 +71,31 @@ $app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), func
     }
 )->conditions(['id' => '\d+']);
 
+$app->post('/admin/outboundsales/calls/:uuid/bankdetails', $authenticate($app), $is_admin($app), function ($uuid) use ($app)
+    {
+        $post = $app->request()->post();
+
+        error_log("[BANK DETAILS]" . json_encode($post));
+        try {
+            $call = OutboundCall::where('uuid', $uuid)->firstOrFail();
+        } catch (\Exception $e) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+        $call->bank_id = $post['bank_id'];
+        $call->account_number = $post['account_number'];
+        $call->branch_code = $post['branch_code'];
+        $call->account_type = $post['account_type'];
+        $call->save();
+
+        echo json_encode([
+            'status' => 'ok',
+        ]);
+    }
+);
+
 $app->post('/admin/outboundsales/calls/:uuid/callstatus', $authenticate($app), $is_admin($app), function ($uuid) use ($app)
     {
         $post = $app->request()->post();

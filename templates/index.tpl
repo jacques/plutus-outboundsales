@@ -387,7 +387,7 @@ Because you can also add your spouse and your parents and your kids for a small 
       <h2 class="page-header">Debit Order</h2>
 
       <p>
-<form class="form-horizontal">
+<div class="form-horizontal">
   <div class="form-group">
     <label for="inputBank" class="col-sm-2 control-label">Bank</label>
     <div class="col-sm-10">
@@ -401,13 +401,13 @@ Because you can also add your spouse and your parents and your kids for a small 
   <div class="form-group">
     <label for="inputAccountNumber" class="col-sm-2 control-label">Account Number</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputAccount Number" placeholder="Account Number">
+      <input type="text" name="account_number" class="form-control" id="inputAccountNumber" placeholder="Account Number">
     </div>
   </div>
   <div class="form-group">
     <label for="inputBranchCode" class="col-sm-2 control-label">Branch Code</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputBranchCode" placeholder="Branch Code">
+      <input type="text" name="branch_code" class="form-control" id="inputBranchCode" placeholder="Branch Code">
     </div>
   </div>
   <div class="form-group">
@@ -421,13 +421,10 @@ Because you can also add your spouse and your parents and your kids for a small 
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button id="paymethod-debitorder" type="submit" class="btn btn-default">Store Banking Details</button>
+      <button id="paymethod-debitorder" type="button" class="btn btn-default">Store Banking Details</button>
     </div>
   </div>
-</form>
       </p>
-      <form>
-      </form>
     </div>
     <div id="creditcard">
       <h2 class="page-header">Credit Card Payment</h2>
@@ -563,6 +560,28 @@ $('#email-card-link').click(function() {
     data: {"call_status":"answered","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
     success: function( returnedData ) {
       $( '#email-card-link' ).html( '<p>Email sent to user with the credit card tokenisation link.</p>' );
+    }
+  });
+});
+
+$('#paymethod-debitorder').click(function() {
+  var bank_id = $('#inputBankId').val();
+  var account_number = $('#inputAccountNumber').val();
+  var account_type = $('#inputAccountType').val();
+  var branch_code = $('#inputBranchCode').val();
+
+  $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/bankdetails",
+    data: {
+      "bank_id": bank_id,
+      "account_number": account_number,
+      "account_type": account_type,
+      "branch_code": branch_code,
+      "{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"
+    },
+    success: function( returnedData ) {
+      $( '#debitorder-results' ).html( '<p>Banking details saved.</p>' );
     }
   });
 });
