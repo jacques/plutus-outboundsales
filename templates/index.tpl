@@ -36,6 +36,8 @@
           <th>Surname</th>
           <th>Email Address</th>
           <th>Mobile Number</th>
+          <th>ID Type</th>
+          <th>Document Number</th>
           <th>FICA Status</th>
         </tr>
       </thead>
@@ -45,6 +47,8 @@
           <td>{$user->last_name|escape}</td>
           <td>{$user->email_address|escape}</td>
           <td>{$user->mobile_number|escape}</td>
+          <td>{if $user->id_type == 1}SA ID{elseif $user->id_type == 2}Passport{elseif $user->id_type == 3}SA Asylum{/if}</td>
+          <td>{$user->id_document_number|escape}</td>
           <td class="{if $user->fica_status == 0}danger{elseif $user->fica_status == 1}warning{else}success{/if}">{$user->fica_status}</td>
         </tr>
       </tbody>
@@ -207,12 +211,6 @@
          </td>
       </tr>
     </table>
-
-    <p>
-      Okay {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} that is greate because we have an amazing deal that we can offer you where
-      you can save on airtime and data.
-    </p>
-
 
     <div id="two">
       <h3 class="page-header">FREEDOM CONNECT FOUR HUNDRED</h3>
@@ -491,24 +489,9 @@ Because you can also add your spouse and your parents and your kids for a small 
     <div id="wallet">
       <h2 class="page-header">IMOGO Wallet</h2>
 
-      <p>
-        Great.  Please remember to ensure your monthly amount of R 200.00 and your once-off amount of R 200.00
-        is deposited into the following FNB bank account.  I will also send you an email with the confirm your
-        subscription which includes the banking details to use as well as how deposit at Boxer, Pick 'n Pay,
-        Checkers, Shoprite and Spar if that is more convient for you.
-      </p>
     </div>
     <div id="debitorder">
       <h2 class="page-header">Debit Order</h2>
-
-      <p>
-        Great.  Please provide me with your banking details so we can setup a debit order for paying for your bouquet.
-      </p>
-
-      <p>
-        Please note that your debit order for your registration fee will come off your account within the next three
-        business days.
-      </p>
 
       <p>
 <form class="form-horizontal">
@@ -556,22 +539,8 @@ Because you can also add your spouse and your parents and your kids for a small 
     <div id="creditcard">
       <h2 class="page-header">Credit Card Payment</h2>
 
-      <p>
-        I will send you an email with a link to add a credit card to your profile via PayFast our payment provider.
-      </p>
-
       <button class="btn btn-primary"><i class="fa fa-fw fa-send"></i> Send Card Link</button>
     </div>
-
-    <p>
-      In the case that no longer want to combo you can cancel at anytime and there is no cancellation fee.
-    </p>
-
-
-    <p>
-      Do you have any questions {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape}?
-    </p>
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
