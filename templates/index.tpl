@@ -17,17 +17,9 @@
 
     <div class="alert alert-danger">
       <p>
-        This is not a finalised and signed off by Tim Colman script.  It is rough for
-        figuring out how to get a web page to display information and change the script
-        as the call goes on. (i.e. opting into product / requesting info / etc.)
+        Use the approved with Tim script.  This is now just dealing with the checklist for a call.
       </p>
     </div>
-
-<div class="progress">
-  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-    <span class="sr-only">45% Complete</span>
-  </div>
-</div>
 
     <table class="table table-bordered table-condensed small">
       <thead>
@@ -65,10 +57,6 @@
       </p>
     </div>
 
-    <p>
-      Good day.  Can I please speak with <strong>{$user->first_name|escape} {$user->last_name|escape}</strong>?
-    </p>
-
     <div id="reachedcustomer">
       <p>
         <strong>Got this customer?</strong>:
@@ -81,46 +69,6 @@
 
     <p>
 <div class="row">
-  <div class="col-lg-6">
-    <h3 class="page-header">Customer is on other end of the phone</h3>
-
-    <p>
-    How are you? (wait for customers answer)
-    </p>
-
-    <p>
-    I am good thanks!
-    </p>
-
-    <p>
-      You are speaking to {$smarty.session.first_name|escape}, I am a consulant from IMOGO.
-    </p>
-
-    <p>
-      {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} please be advised - all calls are recorded for your security and training purposes.
-    </p>
-
-    <p>
-      Do you have a few minutes {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} that you can spare?
-    </p>
-
-    <p>
-      Can you confirm your {if $user->id_type == 1}Idenity Number{elseif $user->id_type == 2}Passport Number{elseif $user->id_type == 3}Asylum Document Number{/if}.  (User should give you <strong>{$user->id_document_number}</strong>).
-    </p>
-
-    <p>
-      Thank you very much.
-    </p>
-
-    <p>
-      {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} as one of our valued clients firstly I would like to introduce and offer you some of our new products.
-    </p>
-
-    <p>
-      We have our 3 freedom connect packages but before I explain further about our freedom connect deals I would like to ask you if:
-    </p>
-  </div>
-  <div class="col-lg-6">
     <h3 class="page-header">Customer is not on other end of the phone</h3>
 
     <p>
@@ -167,8 +115,6 @@
       </table>
       </form>
     </p>
-
-  </div>
 </div>
     </p>
 
@@ -379,46 +325,12 @@ Because you can also add your spouse and your parents and your kids for a small 
     </p>
 
     <p>
-      There is too much value.
-    </p>
-
-    <p>
-      We have a registration fee of R 200 it's a once off fee and you get your freedom connect combo within the next 48 hours after your first payment
-      is received by IMOGO.  The greate part is that you can split the registration and the package fee.
-    </p>
-
-    <p>
-      Do you want to pay the R 200 registration fee and then on the first of the month you can pay your package fee?
-    </p>
-
-    <p>
-      Upon reciept of the registration fee, we will courier your Telkom Simsonke Simcard to you.  You will need to have proof of identity and proof of
-      address when RAM comes to deliver your sim card.
-    </p>
-
-    <p>
-      {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape} isnt't this a great deal?
-    </p>
-
-    <p>
-      Can I sign you up {if $user->gender == 'm'}Mr{else}Ms{/if} {$user->last_name|escape}?
-    </p>
-
-    <p>
-      And would you like to pay by credit card, debit order, you can even pay via your IMOGO wallet!
-    <p>
-
-    <p>
       Is your estate worth more than R 250k?
 
       <select name="estate_worth_less_250k">
         <option value="no">No</option>
         <option value="yes">Yes</option>
       </select>
-    </p>
-
-    <p>
-      We are going to give you special airtime.  For just R 200.
     </p>
 
     <p>
@@ -431,7 +343,6 @@ Because you can also add your spouse and your parents and your kids for a small 
 </div>
     </p>
 
-
     <p>
       Can I interest you in a funeral plan for R 10k cover for you and your family?  (Details to be populated still).
 <div class="pull-right">
@@ -440,19 +351,6 @@ Because you can also add your spouse and your parents and your kids for a small 
       <option value="no">No</option>
     </select>
 </div>
-    </p>
-
-
-    <p>
-      How does that sound {$user->last_name|escape}?
-    </p>
-
-    <p>
-      May I go ahead and get your details for your activation of your Freedom Connect package?
-    </p>
-
-    <p>
-      Please confirm your ID number {$user->last_name|escape} (expect {$user->id_document_number|escape}).
     </p>
 
 {if empty($user->email_address)}
@@ -469,13 +367,8 @@ Because you can also add your spouse and your parents and your kids for a small 
       <button type="button" class="btn btn-info" id="bongotel-issue-dialler">Issue BongoTel Dialler</button>
     </p>
 
-
     <p>
-      RAM will courier the package to you within the next 24 hours after this phone call.
-    </p>
-
-    <p>
-      Can I confirm how you would like to pay for your product Bouquet?
+      <h2 class="page-header">Payment Method</h2>
 
 <div class="pull-right">
       <select id="payment_method" name="payment_method" class="form-control">
