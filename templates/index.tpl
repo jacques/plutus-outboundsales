@@ -585,6 +585,28 @@ $('#paymethod-debitorder').click(function() {
     }
   });
 });
+
+$('#paymethod-debitorder').click(function() {
+  var bank_id = $('#inputBankId').val();
+  var account_number = $('#inputAccountNumber').val();
+  var account_type = $('#inputAccountType').val();
+  var branch_code = $('#inputBranchCode').val();
+
+  $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/bankdetails",
+    data: {
+      "bank_id": bank_id,
+      "account_number": account_number,
+      "account_type": account_type,
+      "branch_code": branch_code,
+      "{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"
+    },
+    success: function( returnedData ) {
+      $( '#debitorder-results' ).html( '<p>Banking details saved.</p>' );
+    }
+  });
+});
 {/literal}
     </script>
     <script src="/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
