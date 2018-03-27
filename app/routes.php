@@ -100,6 +100,15 @@ $app->post('/admin/outboundsales/calls/:uuid/bankdetails', $authenticate($app), 
         $call->account_type = $post['account_type'];
         $call->save();
 
+        error_log('Updating banking details on user account.');
+
+        $user = User::findOrFail($call->user_id);
+        $user->bank_id = $post['bank_id'];
+        $user->account_number = $post['account_number'];
+        $user->branch_code = $post['branch_code'];
+        $user->account_type = $post['account_type'];
+        $user->save();
+
         echo json_encode([
             'status' => 'ok',
         ]);
