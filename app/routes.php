@@ -46,8 +46,18 @@ $app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), func
         if (!$campaign->active) {
             $app->notFound();
         }
+        $uuid = $app->request()->get('uuid');
 
-        $user = $campaign->outbound_campaign_leads()->inRandomOrder()->first()->user()->first();
+        if (!is_null($uuid)) {
+            try {
+                $user = User::where('uuid', $uuid);
+                $user->firstOrFail();
+            } catch (\Exception $e) {
+                $app->notFound();
+            }
+        } else {
+            $user = $campaign->outbound_campaign_leads()->inRandomOrder()->first()->user()->first();
+        }
 
         $call = new OutboundCall;
         $call->uuid = UUID::uuidv4();

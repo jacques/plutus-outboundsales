@@ -28,6 +28,8 @@
       <td class="{if $user->fica_status == 0}danger{elseif $user->fica_status == 1}warning{elseif $user->fica_status == 2}success{/if}">{$user->fica_status}</td>
       <td>
         <a href="/admin/customers/{$user->id}"><i class="fa fa-user fa-fw"></i> View Customer</a>
+          &mdot;
+        <a href="/admin/outboundsales/{$campaign->id}?uuid={$user->uuid}"><i class="fa fa-phone fa-fw"></i> Call Customer</a>
       </td>
     </tr>
 {foreachelse}
