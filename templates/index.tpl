@@ -361,6 +361,48 @@ Because you can also add your spouse and your parents and your kids for a small 
 </div>
     </p>
 
+    <p>
+        <strong>SINGLE MEMBER AGE 18 - 64</strong>
+
+      <table class="table">
+        <tr>
+          <th>Cover</th>
+          <th>Premium</th>
+          <th>Selected</th>
+        </tr>
+        <tr>
+          <td>R 5000</td>
+          <td>15</td>
+          <td><input type="checkbox" name="funeral[single18][5000]" value="1500" rel="1500" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td>R 10000</td>
+          <td>30</td>
+          <td><input type="checkbox" name="funeral[single18][10000]" value="3000" rel="3000" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td>R 15000</td>
+          <td>45</td>
+          <td><input type="checkbox" name="funeral[single18][15000]" value="3000" rel="3000" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td>R 20000</td>
+          <td>60</td>
+          <td><input type="checkbox" name="funeral[single18][20000]" value="6000" rel="6000" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td>R 30000</td>
+          <td>90</td>
+          <td><input type="checkbox" name="funeral[single18][30000]" value="9000" rel="9000" class="form-control" /></td>
+        </tr>
+      </table>
+<div class="row">
+    <p>
+        Amount to settle Mercantile: ZAR: <strong><span id="output">0.00</span></strong>.
+    </p>
+</div>
+    </p>
+
 {if empty($user->email_address)}
     <p>
       Could you tell me what your email address is so that I can issue you with R10.00 BongoTel credit.
@@ -477,9 +519,12 @@ Because you can also add your spouse and your parents and your kids for a small 
     </div>
     <div id="creditcard">
       <h2 class="page-header">Credit Card Payment</h2>
+      <div id="creditcard-results"></div>
 
       <button id="paymethod-creditcard" class="btn btn-primary"><i class="fa fa-fw fa-send"></i> Send Card Link</button>
     </div>
+
+    <div id="finishedsales-result"></div>
 
       <button id="finish-sale" type="button" class="btn btn-default">Finish Sale</button>
 
@@ -664,6 +709,22 @@ $('finish-sale').click(function() {
       $( '#finishsale-results' ).html( '<p>Marked sale as completed.</p>' );
     }
   });
+});
+
+$(document).ready(function() {
+    function recalculate() {
+        var sum = 0;
+
+        $("input[type=checkbox]:checked").each(function() {
+            sum += parseInt($(this).attr("rel"));
+        });
+
+        $("#output").html(sum/100);
+    }
+
+    $("input[type=checkbox]").change(function() {
+        recalculate();
+    });
 });
 {/literal}
     </script>
