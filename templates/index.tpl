@@ -365,12 +365,12 @@ Because you can also add your spouse and your parents and your kids for a small 
     </p>
 
     <p>
-      <input type="text" name="email_address" placeholder="Email Address" value="" id="email-address">
+      <input type="text" name="email_address" placeholder="Email Address" value="" id="inputEmailAddress">
     </p>
 {/if}
 
     <p>
-      <button type="button" class="btn btn-info" id="bongotel-issue-dialler">Issue BongoTel Dialler</button>
+      <button type="button" class="btn btn-info" id="issue-bongotel-dialler">Issue BongoTel Dialler</button>
     </p>
 
     <p>
@@ -590,10 +590,11 @@ $('#call-answered').click(function() {
 });
 
 $('#issue-bongotel-dialler').click(function() {
-   $.ajax({
+  var email_address = $('#inputEmailAddress').val();
+  $.ajax({
     type: "POST",
     url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/diallers/issue",
-    data: {"call_status":"answered","{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
+    data: {"email_address":email_address,"{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"},
     success: function( returnedData ) {
       $( '#bongotel' ).html( '<p>BongoTel dialler issued to the user.  SMS should arrive shortly.</p>' );
     }
@@ -638,6 +639,7 @@ $('#paymethod-debitorder').click(function() {
   var account_number = $('#inputAccountNumber').val();
   var account_type = $('#inputAccountType').val();
   var branch_code = $('#inputBranchCode').val();
+  var action_date = $('#inputActionDate').val();
 
   $.ajax({
     type: "POST",
@@ -647,6 +649,7 @@ $('#paymethod-debitorder').click(function() {
       "account_number": account_number,
       "account_type": account_type,
       "branch_code": branch_code,
+      "action_date": action_date,
       "{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"
     },
     success: function( returnedData ) {
