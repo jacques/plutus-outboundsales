@@ -98,6 +98,7 @@ $app->post('/admin/outboundsales/calls/:uuid/bankdetails', $authenticate($app), 
         $call->account_number = $post['account_number'];
         $call->branch_code = $post['branch_code'];
         $call->account_type = $post['account_type'];
+        $call->action_date = $post['action_date'];
         $call->save();
 
         error_log('Updating banking details on user account.');
