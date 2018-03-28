@@ -333,10 +333,12 @@ Because you can also add your spouse and your parents and your kids for a small 
     <p>
       Is your estate worth more than R 250k?
 
-      <select name="estate_worth_less_250k">
+<div class="pull-right">
+      <select name="estate_worth_less_250k" class="form-control">
         <option value="no">No</option>
         <option value="yes">Yes</option>
       </select>
+</div>
     </p>
 
     <p>
@@ -478,6 +480,8 @@ Because you can also add your spouse and your parents and your kids for a small 
 
       <button id="paymethod-creditcard" class="btn btn-primary"><i class="fa fa-fw fa-send"></i> Send Card Link</button>
     </div>
+
+      <button id="finish-sale" type="button" class="btn btn-default">Finish Sale</button>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -645,6 +649,19 @@ $('paymethod-creditcard').click(function() {
     },
     success: function( returnedData ) {
       $( '#creditcard-results' ).html( '<p>Credit Card Link sent.</p>' );
+    }
+  });
+});
+
+$('finish-sale').click(function() {
+  $.ajax({
+    type: "POST",
+    url: "/admin/outboundsales/calls/{/literal}{$call->uuid}{literal}/finishsales",
+    data: {
+      "{/literal}{$csrf_key}{literal}":"{/literal}{$csrf_token}{literal}"
+    },
+    success: function( returnedData ) {
+      $( '#finishsale-results' ).html( '<p>Marked sale as completed.</p>' );
     }
   });
 });
