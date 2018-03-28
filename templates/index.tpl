@@ -238,6 +238,10 @@ Because you can also add your spouse and your parents and your kids for a small 
       </p>
 
       <p>
+        R 60 worth of BongoTel Airtime.
+      </p>
+
+      <p>
         R 300 Gift Voucher
       </p>
 
@@ -286,6 +290,7 @@ Because you can also add your spouse and your parents and your kids for a small 
           <li>10GiB of Telkom Wifi Data</li>
           <li>100 SMS Message</li>
           <li>500Mb Free Whatapp Data</li>
+          <li>R 100 BongoTel Airtime</li>
         </ul>
       </p>
     </div>
@@ -306,11 +311,12 @@ Because you can also add your spouse and your parents and your kids for a small 
         The package provides you with:
 
         <ul>
-          <li>1GiB of data</li>
+          <li>2GiB of data</li>
           <li>300 Telkom to Telkom minutes (with a bonus of double the airtime which expires after 7 days)</li>
           <li>10GiB of Telkom Wifi Data</li>
           <li>100 SMS Message</li>
           <li>500Mb Free Whatapp Data</li>
+          <li>R 200 BongoTel Airtime</li>
         </ul>
       </p>
     </div>
@@ -382,6 +388,9 @@ Because you can also add your spouse and your parents and your kids for a small 
     <div id="wallet">
       <h2 class="page-header">IMOGO Wallet</h2>
 
+      <p>
+        Paying from the wallet is selected.
+      </p>
     </div>
     <div id="debitorder">
       <h2 class="page-header">Debit Order</h2>
@@ -420,6 +429,44 @@ Because you can also add your spouse and your parents and your kids for a small 
     </div>
   </div>
   <div class="form-group">
+    <label for="inputActionDate" class="col-sm-2 control-label">Action Date (or first working day after day)</label>
+    <div class="col-sm-10">
+      <select name="action_date" class="form-control" id="inputActionDate">
+        <option value="1">1st</option>
+        <option value="2">2nd</option>
+        <option value="3">3rd</option>
+        <option value="4">4th</option>
+        <option value="5">5th</option>
+        <option value="6">6th</option>
+        <option value="7">7th</option>
+        <option value="8">8th</option>
+        <option value="9">9th</option>
+        <option value="10">10th</option>
+        <option value="11">11th</option>
+        <option value="12">12th</option>
+        <option value="13">13th</option>
+        <option value="14">14th</option>
+        <option value="15">15th</option>
+        <option value="16">16th</option>
+        <option value="17">17th</option>
+        <option value="18">18th</option>
+        <option value="19">19th</option>
+        <option value="20">20th</option>
+        <option value="21">21st</option>
+        <option value="22">22nd</option>
+        <option value="23">23rd</option>
+        <option value="24">24th</option>
+        <option value="25">25th</option>
+        <option value="26">26th</option>
+        <option value="27">27th</option>
+        <option value="28">28th</option>
+        <option value="29">29th</option>
+        <option value="30">30th</option>
+        <option value="31">31st</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button id="paymethod-debitorder" type="button" class="btn btn-default">Store Banking Details</button>
     </div>
@@ -429,7 +476,7 @@ Because you can also add your spouse and your parents and your kids for a small 
     <div id="creditcard">
       <h2 class="page-header">Credit Card Payment</h2>
 
-      <button class="btn btn-primary"><i class="fa fa-fw fa-send"></i> Send Card Link</button>
+      <button id="paymethod-creditcard" class="btn btn-primary"><i class="fa fa-fw fa-send"></i> Send Card Link</button>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
