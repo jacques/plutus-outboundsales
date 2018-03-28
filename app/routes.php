@@ -50,8 +50,8 @@ $app->get('/admin/outboundsales/:id', $authenticate($app), $is_admin($app), func
 
         if (!is_null($uuid)) {
             try {
-                $user = User::where('uuid', $uuid);
-                $user->firstOrFail();
+                $user = User::where('uuid', $uuid)
+                    ->firstOrFail();
             } catch (\Exception $e) {
                 $app->notFound();
             }
